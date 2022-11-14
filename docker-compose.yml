@@ -1,0 +1,27 @@
+version: "3.9"  # optional since v1.27.0
+
+services:
+   database:
+     image: postgres:alpine
+     ports:
+       - "5432"
+     volumes:
+       - db_data:/var/lib/postgresql/data
+     env_file:
+       - .env
+     extra_hosts:
+       - "host.docker.internal:host-gateway"
+   api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    env_file:
+      - .env
+    extra_hosts:
+      - "docker.for.mac.host.internal:host-gateway"
+
+
+volumes:
+  db_data:

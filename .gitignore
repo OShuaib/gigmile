@@ -1,0 +1,4 @@
+.env
+
+# Volumes for docker apps spun by docker compose
+container-volumes
